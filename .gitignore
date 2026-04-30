@@ -1,0 +1,4 @@
+.DS_Store
+.pi/
+scratch/*
+!scratch/README.md
