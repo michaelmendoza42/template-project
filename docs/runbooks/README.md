@@ -1,5 +1,5 @@
 # Runbooks
-Last edited: 2026-04-30
+Last edited: 2026-05-11
 
 Use this folder for repeatable operational procedures.
 
@@ -20,9 +20,13 @@ A runbook should be executable by someone who was not present for the original d
 
 ## Related docs
 
+- `react-feature-paradigm.md`
 - `../special/documentation-schema.md`
 
 ## Changelog
+
+### 2026-05-11
+- Linked the React feature paradigm runbook as canonical guidance for feature implementation.
 
 ### 2026-04-30
 - Reformatted this README to match the repo documentation schema.

@@ -1,0 +1,317 @@
+# Technical glossary
+Last edited: 2026-05-04
+Status: Active
+Scope: Internal implementation terminology, hidden mechanics, and AI-built structures that may not be user-facing
+Related files: `glossary.md`, `README.md`, `../special/documentation-model.md`, `../special/documentation-schema.md`
+
+Use this glossary to name the technical structures inside a repository, especially when they are implementation details, AI-built abstractions, or conventions that are important to maintain but may not be surfaced directly to users.
+
+## Purpose
+
+This document complements `glossary.md`.
+
+- `glossary.md` covers shared repo and domain language that humans are expected to use broadly.
+- `technical-glossary.md` covers the lower-level implementation language that keeps the codebase explainable.
+
+If an AI agent creates a component, helper, process, state model, adapter, selector, cache layer, or workflow name that the team may need to reason about later, define it here even if end users never see it.
+
+## How to use this glossary
+
+Document internal terms when they are:
+
+- repeatedly referenced in code reviews, plans, or agent output
+- useful for debugging or handoff
+- not obvious from a public API alone
+- important to preserve during refactors
+- likely to otherwise survive only as inferred memory
+
+Each term should explain:
+
+- what the thing is
+- where it lives
+- why it exists
+- what depends on it
+- what would break if it changed carelessly
+
+## Categories
+
+### UI architecture terms
+
+#### Component boundary
+The functional edge around a component’s responsibilities: what state it owns, what it renders, what it delegates, and what inputs and outputs define its contract.
+
+#### Presentation component
+A component primarily responsible for rendering UI from inputs, with minimal business logic.
+
+#### Container component
+A component that coordinates data loading, state wiring, side effects, or orchestration for child presentation components.
+
+#### Slot
+A named insertion point where callers can provide custom UI or content.
+
+#### Variant
+A controlled visual or behavioral mode for a component, usually expressed through props, tokens, modifiers, or style classes.
+
+#### Composition layer
+The part of the UI tree that assembles reusable pieces into a larger screen, route, or section.
+
+#### View model
+A UI-oriented data shape prepared for rendering, often derived from domain objects so components stay simple.
+
+### State and data-flow terms
+
+#### Source of truth
+The authoritative location for a piece of state at a given layer.
+
+#### Derived state
+State computed from other state rather than authored directly.
+
+#### Local state
+State owned by one component, module, or narrow feature scope.
+
+#### Shared state
+State accessed by multiple components, modules, or subsystems.
+
+#### State transition
+A defined change from one meaningful state to another, often triggered by user action, async completion, or system events.
+
+#### Event bridge
+A small layer that translates one event system, emitter, callback style, or message shape into another.
+
+#### Synchronization point
+A place where multiple state updates, async operations, or subsystems must agree before proceeding.
+
+#### Hydration boundary
+The seam where serialized, server-generated, cached, or persisted data becomes live runtime state.
+
+### Domain-to-implementation mapping terms
+
+#### Domain model
+A representation of business entities and rules as the system understands them.
+
+#### Transport model
+The request/response or wire-format representation used across APIs, storage, or messaging boundaries.
+
+#### Persistence model
+The shape used to store data in a database, file, cache, or durable medium.
+
+#### Mapping layer
+The code that translates between domain, transport, persistence, or UI-specific representations.
+
+#### Normalization
+The process of reshaping data into a canonical internal form.
+
+#### Denormalized view
+A convenience shape optimized for reads, rendering, or reporting rather than strict normalization.
+
+### Integration terms
+
+#### Adapter
+A wrapper that reshapes an external dependency into an internal contract the codebase prefers.
+
+#### Gateway
+A boundary object or module that centralizes access to an external system.
+
+#### Provider
+A dependency source that supplies configuration, services, contexts, or external capabilities to consumers.
+
+#### Client
+A module responsible for making requests to another service or runtime boundary.
+
+#### Facade
+A simplified interface that hides a more complex subsystem behind a smaller API.
+
+#### Shim
+A thin compatibility layer added to smooth over version, environment, or API differences.
+
+#### Fallback path
+An alternate execution route used when the primary dependency, data source, or feature path is unavailable.
+
+### Async and job-processing terms
+
+#### Pipeline
+A staged sequence of transformations or operations where the output of one stage feeds the next.
+
+#### Stage
+A named step within a pipeline or workflow.
+
+#### Queue
+A buffer of work awaiting execution.
+
+#### Worker
+A unit that pulls queued or assigned work and executes it.
+
+#### Retry policy
+The rule set that determines when and how failed work is attempted again.
+
+#### Idempotent operation
+An operation that can run multiple times without changing the final result beyond the first successful application.
+
+#### Dead-letter path
+The holding area or failure route for work that cannot be processed successfully after normal attempts.
+
+### Rendering and styling terms
+
+#### Design token
+A named design value such as color, spacing, radius, duration, or typography scale intended for reuse.
+
+#### Semantic token
+A design token named by purpose rather than raw value, such as `surface-muted` instead of `gray-100`.
+
+#### Layout primitive
+A low-level reusable building block for spacing, stacking, alignment, grid, or containment.
+
+#### Interaction state
+A visual or behavioral state driven by focus, hover, pressed, selected, disabled, loading, or validation conditions.
+
+#### Motion contract
+The agreed timing, easing, trigger, and visibility rules for UI movement and transitions.
+
+#### Rendering path
+The path by which a screen or component reaches its final rendered form, including data preparation and conditional branches.
+
+### Code organization terms
+
+#### Module boundary
+The responsibility line around a file or module, including what it may import, expose, and coordinate.
+
+#### Public surface
+The intentionally supported exports, props, functions, routes, or commands that callers should depend on.
+
+#### Internal API
+A callable interface used inside the repo but not intended as a stable public contract.
+
+#### Leaf module
+A module with no meaningful internal dependents below it in a subsystem.
+
+#### Orchestrator
+A module that coordinates multiple lower-level helpers or services without owning all of their core logic.
+
+#### Utility
+A narrow helper with limited state and broad reuse potential.
+
+#### Helper
+A supporting function or module that serves a specific local need, usually with less durability than a utility.
+
+### Reliability and debugging terms
+
+#### Invariant
+A condition that must remain true for the system to be correct.
+
+#### Guardrail
+A code or process constraint that prevents misuse or unsafe change.
+
+#### Recovery path
+The route the system uses to restore a safe or usable state after an error.
+
+#### Failure mode
+A specific way a component, process, or dependency can break.
+
+#### Probe
+A targeted diagnostic check used to observe runtime behavior.
+
+#### Instrumentation point
+A code location where logs, metrics, traces, or debug signals are emitted.
+
+#### Backpressure
+A condition where downstream capacity limits require the system to slow, buffer, reject, or reshape incoming work.
+
+### AI-built structure terms
+
+#### AI-built abstraction
+A component, helper, pattern, or conceptual layer introduced by an AI agent during implementation.
+
+#### Hidden contract
+An unstated dependency or assumption that exists in code but is not obvious from names or public APIs.
+
+#### Ghost feature
+A capability partially implemented in code but not formally documented, named, or intentionally exposed.
+
+#### Shadow workflow
+An operational or code path that exists in practice but is not yet recognized as an official supported workflow.
+
+#### Naming debt
+The gap between what a thing is called in code and what it actually does.
+
+#### Intent drift
+The condition where a structure’s current behavior no longer matches the reason it was originally introduced.
+
+#### Compression artifact
+A misleading simplification introduced by AI or humans when collapsing a complex design into a smaller implementation explanation.
+
+### Documentation hygiene terms
+
+#### Canonical name
+The preferred stable term the repo should use for a concept.
+
+#### Alias term
+An older, local, transitional, or informal name that points to the canonical name.
+
+#### Deprecated term
+A term that should no longer be introduced in new code or docs, even if legacy references remain.
+
+#### Surfaced term
+A term intentionally exposed to users, operators, or API consumers.
+
+#### Internal term
+A term intended only for maintainers, implementers, and agent handoff.
+
+## Maintenance rule
+
+When the codebase gains non-obvious internal structure, update this glossary before relying on memory or chat context to explain it later.
+
+This is especially important when:
+
+- an AI introduced a new abstraction
+- a refactor created a new layer or responsibility boundary
+- a hidden workflow became important to operations
+- a new internal name started appearing in commits, plans, or reviews
+
+## Entry requirements for future repo-specific terms
+
+For repo-specific internal terms, use the structured format below.
+These fields are required unless a field truly does not apply:
+
+- **Lives in**
+- **Why it exists**
+- **Used by**
+- **Change risk**
+
+Add these when useful:
+
+- **Depends on**
+- **Alias**
+- **Surfaced to users**
+- **Notes**
+
+The concise definitions above are the baseline vocabulary for this template.
+Future project-specific additions should use the stricter format below so AI-built structures and hidden mechanics stay maintainable.
+
+```md
+### Term name
+Short definition.
+
+- **Lives in:** `path/or/subsystem`
+- **Why it exists:** brief rationale
+- **Used by:** downstream consumers
+- **Change risk:** what can break if altered carelessly
+- **Depends on:** upstream inputs or collaborators
+- **Alias:** older or local names, if any
+- **Surfaced to users:** yes/no, and where if yes
+- **Notes:** debugging clues, invariants, or migration cautions
+```
+
+## Related docs
+
+- `glossary.md`
+- `README.md`
+- `../special/documentation-model.md`
+- `../special/documentation-schema.md`
+
+## Changelog
+
+### 2026-05-04
+- Added a stricter entry format for future repo-specific technical terms, including location, rationale, consumers, and change risk.
+
+### 2026-05-04
+- Added the initial technical glossary for internal implementation terms, AI-built abstractions, and hidden repo mechanics.

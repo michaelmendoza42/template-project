@@ -1,5 +1,5 @@
 # Domain Docs
-Last edited: 2026-04-30
+Last edited: 2026-05-04
 
 Use this folder for durable domain knowledge.
 
@@ -21,10 +21,18 @@ If a rule is still being tested or debated, keep it in a temporary plan until it
 
 ## Related docs
 
+- `glossary.md`
+- `technical-glossary.md`
 - `../special/documentation-schema.md`
 - `../special/documentation-model.md`
 
 ## Changelog
+
+### 2026-05-04
+- Linked the technical glossary for internal implementation terminology.
+
+### 2026-05-04
+- Linked the new glossary as a canonical domain document.
 
 ### 2026-04-30
 - Reformatted this README to match the repo documentation schema and clarified related docs.
