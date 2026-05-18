@@ -1,14 +1,58 @@
 # Repository Documentation Model
-Last edited: 2026-04-30
+Last edited: 2026-05-17
 Status: Active
 Scope: Repository-wide documentation policy
-Related files: `documentation-schema.md`, `../README.md`
+Related files: `documentation-schema.md`, `../README.md`, `../domain/glossary.md`
 
-This repository separates documentation into four tiers so stable policy does not get mixed with temporary work state.
+This repository separates two questions that often get conflated:
+
+1. **Where does a piece of knowledge live?**
+2. **Who authorized it?**
+
+The documentation tiers answer the first question. The authority model answers the second.
+
+## Authority model
+
+Location alone does not create authority. Human approval does.
+
+### 1. Human explicit decisions
+
+These are binding until replaced by a newer human-approved decision.
+
+Examples:
+
+- direct user instructions
+- approved ADRs
+- approved domain rules and contracts
+- approved runbooks
+- stable repo policy in `AGENTS.md` or approved docs under `docs/special/`
+
+### 2. AI explicit proposals
+
+These are written-down drafts produced by an AI agent: proposed ADRs, draft conventions, candidate policies, and other suggested durable changes.
+
+Rules:
+
+- useful to keep for review
+- not binding until a human approves them
+- default home is `plans/active/` or `tasks/`
+- if stored in canonical docs, they must be clearly marked, for example with `Status: Proposed`
+
+### 3. AI implicit decisions
+
+These are temporary assumptions, local defaults, inferred conventions, and implementation choices an AI made without explicit human approval.
+
+Rules:
+
+- disposable and revisable
+- may change anytime unless they conflict with human explicit decisions
+- never become policy just because they appeared in chat, code, or an AI-authored doc once
 
 ## 1. Canonical docs
 
-Canonical docs are the source of truth.
+Canonical docs are the durable home for repo policy and knowledge that humans expect to rely on repeatedly.
+
+Most canonical docs should represent human-approved truth. If a canonical doc is a proposal vehicle, it must say so explicitly.
 
 Store them in:
 
@@ -60,6 +104,7 @@ Use them for:
 - active rollout plans
 - checkpoint state for long-running work
 - task-level execution notes
+- AI-authored proposals awaiting review unless the user asked for a formal proposal doc elsewhere
 
 Every temporary document should declare:
 
@@ -70,7 +115,7 @@ Every temporary document should declare:
 
 ## 4. Inferred memory
 
-Inferred memory includes tool-learned preferences, chat context, or temporary assumptions.
+Inferred memory includes tool-learned preferences, chat context, temporary assumptions, or AI implicit decisions.
 
 Use it only as a convenience.
 
@@ -86,7 +131,10 @@ If it matters, write it down explicitly.
 
 ## Promotion rule
 
-Nothing inferred becomes policy until it is promoted into a canonical document.
+Nothing inferred becomes policy until it is both:
+
+- promoted into the right durable home, and
+- approved by a human
 
 When a temporary plan or recurring assumption becomes important, move it into the right durable home:
 
@@ -95,6 +143,15 @@ When a temporary plan or recurring assumption becomes important, move it into th
 - `docs/domain/` for invariants and contracts
 - `docs/runbooks/` for repeatable procedures
 - `docs/special/` for project-specific policy and special cases
+
+Promotion chooses the document home. Human approval makes it binding.
+
+## Practical rules
+
+- Do not silently replace a human-approved decision with an AI-authored rewrite.
+- If an approved decision needs to change, draft the replacement and ask for approval or record the superseding approval explicitly.
+- Do not treat placement under `docs/` as proof that a rule is binding.
+- When approval matters, encode it with metadata such as `Status`, `Decision owner`, and `Approved by`.
 
 ## Anti-patterns
 
@@ -105,8 +162,14 @@ Avoid these failure modes:
 - keeping migration strategy only in chat history
 - relying on inferred memory for anything safety-critical
 - leaving temporary docs unlabelled so they look permanent
+- treating an AI-authored doc as automatically ratified because it lives under `docs/`
+- silently rewriting approved policy without human direction
 
 ## Changelog
+
+### 2026-05-17
+- Added an explicit authority model separating human-approved decisions from AI-authored proposals and AI implicit decisions.
+- Clarified that promotion chooses the durable document home, while human approval is what makes a decision binding.
 
 ### 2026-04-30
 - Reformatted this policy doc to match the repo documentation schema and linked it to the schema file.

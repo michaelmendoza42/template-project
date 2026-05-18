@@ -1,16 +1,23 @@
 # Template Project
-Last edited: 2026-05-11
+Last edited: 2026-05-17
 
-Starter layout for projects that separate durable policy from temporary work state, with React.js as the default feature-development paradigm.
+Starter governance template for React/web-app repositories that separates durable policy from temporary work state and makes decision authority explicit.
 
 ## Overview
 
-This repository is a starter layout for projects that separate:
+This repository is a starter layout for React/web-app projects that separate:
 
 1. **Canonical docs** — stable source-of-truth policy and knowledge
 2. **Scoped operational docs** — local rules near the code they govern
 3. **Ephemeral work artifacts** — temporary plans, migration notes, and task state
 4. **Inferred memory** — useful convenience, never authority
+
+It also makes the authority model explicit:
+
+- **Human decisions** bind until a human replaces them.
+- **AI proposals** are drafts until approved.
+- **AI assumptions** may change anytime unless they conflict with human decisions.
+- **Location alone does not create authority.**
 
 ## Repo layout
 
@@ -38,6 +45,8 @@ This repository is a starter layout for projects that separate:
 - `AGENTS.md` holds stable agent-operational rules that matter in most sessions.
 - `docs/adr/`, `docs/domain/`, `docs/runbooks/`, and `docs/special/` are canonical.
 - React.js is the default implementation paradigm for new feature work in repositories scaffolded from this template.
+- Human-approved policy, ADRs, domain rules, and runbooks outrank AI-authored drafts and inferred conventions.
+- A document becomes binding because a human approved it, not merely because it lives under `docs/`.
 - Add nested `AGENTS.md` files only when a subtree needs local rules that are not globally true.
 - `plans/active/` and `tasks/` hold temporary work state. Label it clearly and promote durable learnings into canonical docs.
 - `scratch/` is disposable. Do not treat it as source of truth.
@@ -45,13 +54,15 @@ This repository is a starter layout for projects that separate:
 
 ## Promotion rule
 
-If a temporary note becomes important enough to rely on repeatedly, promote it to one of:
+If a temporary note or AI inference becomes important enough to rely on repeatedly, promote it to one of:
 
 - `AGENTS.md`
 - `docs/adr/`
 - `docs/domain/`
 - `docs/runbooks/`
 - `docs/special/`
+
+Promotion chooses the durable home. Human approval is what makes the promoted decision binding.
 
 ## Agent instructions
 
@@ -68,6 +79,10 @@ This template uses `AGENTS.md` as the repository's stable agent instruction file
 - `docs/special/documentation-schema.md`
 
 ## Changelog
+
+### 2026-05-17
+- Clarified that this template is a React/web-app-first governance template rather than a full app starter.
+- Made the authority model explicit: human-approved decisions are binding, AI-authored proposals require human approval, and AI implicit decisions remain revisable.
 
 ### 2026-05-11
 - Declared React.js as the default feature-development paradigm for repositories created from this template.

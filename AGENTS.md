@@ -15,11 +15,20 @@ This repo uses four tiers:
 3. **Ephemeral work artifacts** — temporary plans, task notes, migration state
 4. **Inferred memory** — convenience only, never authority
 
+## Decision authority
+
+- Human decisions are binding. Examples: direct user instructions, approved ADRs, approved domain rules, approved runbooks, and stable repo policy in canonical docs.
+- AI may draft plans, docs, conventions, and proposed ADRs, but drafts are not binding until a human approves them.
+- Do not treat file placement under `docs/` as proof of approval.
+- If a human-approved decision seems wrong or outdated, ask for confirmation or draft a replacement; do not silently override it.
+- AI assumptions — temporary defaults and local implementation choices — may be revised freely unless they conflict with human decisions.
+
 ## Working rules
 
 - Keep this file short. Only put rules here that matter in nearly every session.
 - Put subtree-specific exceptions in a nested `AGENTS.md` close to the relevant code.
 - Put temporary planning in `plans/active/` and `tasks/`.
+- Default home for AI-authored proposals is `plans/active/` or `tasks/` unless the user asks for a formal `Status: Proposed` document in a canonical area.
 - Mark temporary docs with:
   - `Status`
   - `Owner`

@@ -1,5 +1,5 @@
 # Repository Documentation Schema
-Last edited: 2026-04-30
+Last edited: 2026-05-17
 Status: Active
 Scope: Canonical and reference Markdown docs in this template repo (`README.md`, `docs/**`, and similar human-facing reference docs)
 Related files: `documentation-model.md`, `../templates/`
@@ -30,7 +30,7 @@ Every in-scope Markdown file should include:
 
 1. `# Title` — a single top-level heading.
 2. `Last edited: YYYY-MM-DD` — placed immediately under the title.
-3. Optional metadata lines such as `Status`, `Owner`, `Scope`, or `Related files`.
+3. Optional metadata lines such as `Status`, `Owner`, `Scope`, `Related files`, `Decision owner`, `Drafted by`, or `Approved by`.
 4. Main body content.
 5. `## Changelog` — always the final top-level section.
 6. Reverse-chronological changelog entries with newest first.
@@ -76,6 +76,7 @@ Recommended sections:
 Recommended sections:
 
 - status metadata
+- decision owner / approval metadata when authority matters
 - context
 - decision
 - consequences
@@ -124,6 +125,10 @@ Copy/paste starters live in `docs/templates/`:
 - `docs/templates/runbook.md`
 
 ## Changelog
+
+### 2026-05-17
+- Added authority-related metadata examples such as `Decision owner`, `Drafted by`, and `Approved by`.
+- Clarified that ADR-style docs should record approval metadata when authority matters.
 
 ### 2026-04-30
 - Added the template repo's documentation schema, scoped only to canonical and reference docs.

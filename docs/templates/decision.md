@@ -1,8 +1,12 @@
 # ADR-0000: Short title
 Last edited: YYYY-MM-DD
-Status: Proposed
-Owner: Name or team
+Status: Proposed | Approved | Superseded
+Decision owner: Name or team
+Drafted by: Human or AI agent
+Approved by: Pending human approval
 Related files: `../special/documentation-schema.md`
+
+> This ADR is binding only when a human sets `Status: Approved` and replaces `Approved by: Pending human approval` with the approving person or role.
 
 ## Context
 
