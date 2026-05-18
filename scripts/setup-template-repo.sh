@@ -101,7 +101,7 @@ cat > "$destination_abs/README.md" <<EOF
 # $repo_name
 Last edited: $today
 
-Starter repository created from the template project.
+Starter React/web-app governance repository created from the template project.
 
 ## Overview
 
@@ -110,9 +110,13 @@ This repository follows the template-project layout:
 - durable policy in \`docs/\` and \`AGENTS.md\`
 - temporary work in \`plans/active/\`, \`tasks/\`, and \`scratch/\`
 - human onboarding in \`README.md\`
+- human-approved decisions outrank AI-authored proposals and inferred conventions
+
+A decision becomes binding through human approval, not merely because an AI wrote it into a durable folder.
 
 ## Next steps
 
+- Read \`docs/special/documentation-model.md\` before letting AI agents create or revise durable docs
 - Add project-specific docs under \`docs/domain/\`, \`docs/runbooks/\`, or \`docs/special/\`
 - Define shared product or repo language in \`docs/domain/glossary.md\`
 - Define internal implementation language in \`docs/domain/technical-glossary.md\`
@@ -125,12 +129,13 @@ This repository follows the template-project layout:
 - \`docs/README.md\`
 - \`docs/domain/glossary.md\`
 - \`docs/domain/technical-glossary.md\`
+- \`docs/special/documentation-model.md\`
 - \`docs/special/documentation-schema.md\`
 
 ## Changelog
 
 ### $today
-- Initialized from the template repo.
+- Initialized from the template repo with the documentation scaffold and authority model.
 EOF
 
 cat > "$destination_abs/.gitignore" <<'EOF'
