@@ -16,17 +16,10 @@ jobs:
 
       - name: Ensure executable bits for local scripts
         run: |
-          chmod +x scripts/setup-template-repo.sh scripts/check-guardrails.sh .githooks/install.sh .githooks/commit-msg
+          chmod +x scripts/setup-template-repo.sh scripts/check-guardrails.sh scripts/check-migration.sh .githooks/install.sh .githooks/commit-msg .githooks/pre-push
 
-      - name: Fail on stale legacy taxonomy references
-        run: |
-          if rg -n 'docs/domain|docs/adr|docs/special|plans/active|\btasks/\b' \
-            --glob '!docs/runbooks/migrating-doc-structure.md' \
-            --glob '!README.md' \
-            docs work scratch scripts warp-pipe AGENTS.md; then
-            echo 'Found stale legacy taxonomy references outside intentional migration history.' >&2
-            exit 1
-          fi
+      - name: Verify migrated taxonomy layout
+        run: ./scripts/check-migration.sh
 
       - name: Scaffold repo into a temporary directory
         run: |
@@ -38,4 +31,5 @@ jobs:
             test -e "$path"
           done
 
+          ./scripts/check-migration.sh
           ./scripts/check-guardrails.sh

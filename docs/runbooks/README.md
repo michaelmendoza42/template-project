@@ -1,5 +1,5 @@
 # Runbooks
-Last edited: 2026-05-20
+Last edited: 2026-05-21
 
 Use this folder for repeatable operational procedures.
 
@@ -26,8 +26,12 @@ A runbook should be executable by someone who was not present for the original d
 - `../standards/definition-of-done.md`
 - `../standards/documentation-schema.md`
 - `../../scripts/check-guardrails.sh`
+- `../../scripts/check-migration.sh`
 
 ## Changelog
+
+### 2026-05-21
+- Linked the migration verification script from the runbooks index.
 
 ### 2026-05-20
 - Linked the guardrail health check from the runbooks index as an operational verification step.
