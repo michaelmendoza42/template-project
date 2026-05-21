@@ -1,39 +1,73 @@
-# Technical glossary
-Last edited: 2026-05-04
+# Glossary
+Last edited: 2026-05-20
 Status: Active
-Scope: Internal implementation terminology, hidden mechanics, and AI-built structures that may not be user-facing
-Related files: `glossary.md`, `README.md`, `../special/documentation-model.md`, `../special/documentation-schema.md`
+Scope: Shared behavioral and technical terminology for repositories created from this template
+Related files: `README.md`, `product/README.md`, `system/README.md`, `standards/documentation-model.md`, `standards/documentation-schema.md`
 
-Use this glossary to name the technical structures inside a repository, especially when they are implementation details, AI-built abstractions, or conventions that are important to maintain but may not be surfaced directly to users.
+Use this glossary for terms that should mean the same thing across the repo.
 
-## Purpose
+## How this glossary is organized
 
-This document complements `glossary.md`.
+This glossary has two sections:
 
-- `glossary.md` covers shared repo and domain language that humans are expected to use broadly.
-- `technical-glossary.md` covers the lower-level implementation language that keeps the codebase explainable.
+- **Behavioral / product / repo terms** — shared language about canonical docs, authority, workflow, and product-facing intent
+- **Technical / implementation terms** — internal architecture, state, integration, rendering, reliability, and AI-built structure language
 
-If an AI agent creates a component, helper, process, state model, adapter, selector, cache layer, or workflow name that the team may need to reason about later, define it here even if end users never see it.
+When adding a term, put it in the section that best matches how the term is used.
 
-## How to use this glossary
+## Glossary maintenance
 
-Document internal terms when they are:
+Keep this file compact and deduplicated.
 
-- repeatedly referenced in code reviews, plans, or agent output
-- useful for debugging or handoff
-- not obvious from a public API alone
-- important to preserve during refactors
-- likely to otherwise survive only as inferred memory
+Add a term only when it is genuinely shared, repeatedly useful, or important for avoiding confusion during implementation, review, or handoff.
 
-Each term should explain:
+Prefer updating an existing term over adding a near-duplicate. If a term is no longer preferred, mark it as deprecated or alias it to the canonical term instead of silently drifting away from it.
 
-- what the thing is
-- where it lives
-- why it exists
-- what depends on it
-- what would break if it changed carelessly
+## Behavioral / product / repo terms
 
-## Categories
+### AGENTS.md
+The stable agent-instruction file for a repository or subtree. It contains rules that are expected to stay true across many sessions.
+
+### AI explicit proposal
+A draft policy, decision, convention, or durable suggestion written down by an AI agent. It is reviewable, but not binding until a human approves it.
+
+### AI implicit decision
+A temporary assumption, default, local implementation choice, or inferred convention made by an AI agent without explicit human approval. AI implicit decisions are disposable and may change at any time unless they conflict with human decisions.
+
+### Canonical docs
+Durable source-of-truth documentation that humans and agents can rely on repeatedly. In this template, canonical docs are the home for approved durable policy and, when clearly marked, formal proposals under review.
+
+### Product docs
+Documentation in `docs/product/` that records intended product behavior, shared language, rules, and invariants.
+
+### Ephemeral work artifacts
+Temporary documents that capture active work state, such as plans, task notes, migration slices, and disposable scratch notes. In this template they belong in `work/` and `scratch/`.
+
+### Human explicit decision
+A direction, policy, or decision explicitly approved by a human. These decisions are binding until superseded by a newer human-approved decision.
+
+### Human ratification
+The human approval step that turns a proposal into a binding repo decision. File placement alone does not count as ratification.
+
+### Inferred memory
+Convenience context derived from chat history, tools, or agent memory. It is useful for speed, but it is never the authority for correctness, architecture, onboarding, safety, or operations.
+
+### Promotion rule
+The rule that temporary or inferred knowledge must be promoted into a canonical document and explicitly approved by a human before the team relies on it long term.
+
+### Runbook
+A repeatable operational procedure stored in `docs/runbooks/`. A runbook should be usable by someone who was not part of the original discussion.
+
+### Scoped operational docs
+Explicit instructions that apply only to a specific subtree or workflow rather than the whole repository. A nested `AGENTS.md` is the main example in this template.
+
+### Standards docs
+Documentation in `docs/standards/` for repository-wide policy, conventions, testing rules, and structural guidance.
+
+### Warp Pipe
+The repository’s intake workflow/folder (`warp-pipe/`) for newly imported assets that need AI-assisted routing into their correct long-term location.
+
+## Technical / implementation terms
 
 ### UI architecture terms
 
@@ -269,7 +303,7 @@ This is especially important when:
 
 ## Entry requirements for future repo-specific terms
 
-For repo-specific internal terms, use the structured format below.
+For repo-specific additions, use the structured format below when the concise definition is not enough.
 These fields are required unless a field truly does not apply:
 
 - **Lives in**
@@ -283,9 +317,6 @@ Add these when useful:
 - **Alias**
 - **Surfaced to users**
 - **Notes**
-
-The concise definitions above are the baseline vocabulary for this template.
-Future project-specific additions should use the stricter format below so AI-built structures and hidden mechanics stay maintainable.
 
 ```md
 ### Term name
@@ -303,15 +334,26 @@ Short definition.
 
 ## Related docs
 
-- `glossary.md`
 - `README.md`
-- `../special/documentation-model.md`
-- `../special/documentation-schema.md`
+- `product/README.md`
+- `system/README.md`
+- `standards/documentation-model.md`
+- `standards/documentation-schema.md`
 
 ## Changelog
 
-### 2026-05-04
-- Added a stricter entry format for future repo-specific technical terms, including location, rationale, consumers, and change risk.
+### 2026-05-20
+- Merged glossary maintenance guidance into the shared glossary.
+- Merged the separate behavioral and technical glossaries into one shared `docs/glossary.md`.
+- Split the glossary into explicit behavioral and technical sections.
+
+### 2026-05-17
+- Added authority-model terms for `Human explicit decision`, `Human ratification`, `AI explicit proposal`, and `AI implicit decision`.
+- Clarified that canonical docs can contain clearly marked proposals, but only human-approved decisions are binding.
+
+### 2026-05-12
+- Added `Warp Pipe` as the canonical term for the repo's AI-assisted asset intake workflow.
 
 ### 2026-05-04
+- Added the initial glossary covering the template repo’s core documentation and workflow terms.
 - Added the initial technical glossary for internal implementation terms, AI-built abstractions, and hidden repo mechanics.

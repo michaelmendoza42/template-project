@@ -1,0 +1,41 @@
+name: Template guardrails
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  scaffold-smoke-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Ensure executable bits for local scripts
+        run: |
+          chmod +x scripts/setup-template-repo.sh scripts/check-guardrails.sh .githooks/install.sh .githooks/commit-msg
+
+      - name: Fail on stale legacy taxonomy references
+        run: |
+          if rg -n 'docs/domain|docs/adr|docs/special|plans/active|\btasks/\b' \
+            --glob '!docs/runbooks/migrating-doc-structure.md' \
+            --glob '!README.md' \
+            docs work scratch scripts warp-pipe AGENTS.md; then
+            echo 'Found stale legacy taxonomy references outside intentional migration history.' >&2
+            exit 1
+          fi
+
+      - name: Scaffold repo into a temporary directory
+        run: |
+          tmpdir="$(mktemp -d)"
+          ./scripts/setup-template-repo.sh "$tmpdir/scaffolded-repo" --name scaffolded-repo
+          cd "$tmpdir/scaffolded-repo"
+
+          for path in AGENTS.md README.md docs work scratch scripts warp-pipe .githooks .gitmessage; do
+            test -e "$path"
+          done
+
+          ./scripts/check-guardrails.sh

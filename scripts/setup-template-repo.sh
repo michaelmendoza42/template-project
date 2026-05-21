@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-  cat <<'EOF'
+  cat <<'USAGE'
 Usage:
   setup-template-repo.sh <destination> [repo-name] [--force]
   setup-template-repo.sh <destination> [--name <repo-name>] [--force]
@@ -13,7 +13,7 @@ initializes a fresh git repo, and rewrites a few starter docs for the new repo.
 Options:
   --name   Repo name to use in the generated README title
   --force  Remove existing destination contents before copying
-EOF
+USAGE
 }
 
 err() {
@@ -86,7 +86,7 @@ if [[ -n "$(find "$destination_abs" -mindepth 1 -maxdepth 1 -print -quit)" ]]; t
   find "$destination_abs" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
 fi
 
-copy_items=(AGENTS.md README.md docs plans scratch tasks .gitignore)
+copy_items=(.githooks .gitmessage AGENTS.md README.md docs work scratch .gitignore scripts warp-pipe)
 for item in "${copy_items[@]}"; do
   src="$repo_root/$item"
   [[ -e "$src" ]] || continue
@@ -96,8 +96,10 @@ done
 rm -rf "$destination_abs/.git"
 
 git -C "$destination_abs" init -q
+git -C "$destination_abs" config core.hooksPath .githooks
+git -C "$destination_abs" config commit.template .gitmessage
 
-cat > "$destination_abs/README.md" <<EOF
+cat > "$destination_abs/README.md" <<README
 # $repo_name
 Last edited: $today
 
@@ -107,8 +109,8 @@ Starter React/web-app governance repository created from the template project.
 
 This repository follows the template-project layout:
 
-- durable policy in \`docs/\` and \`AGENTS.md\`
-- temporary work in \`plans/active/\`, \`tasks/\`, and \`scratch/\`
+- durable policy and knowledge in \`docs/\` and \`AGENTS.md\`
+- temporary execution state in \`work/\` and \`scratch/\`
 - human onboarding in \`README.md\`
 - human-approved decisions outrank AI-authored proposals and inferred conventions
 
@@ -116,10 +118,12 @@ A decision becomes binding through human approval, not merely because an AI wrot
 
 ## Next steps
 
-- Read \`docs/special/documentation-model.md\` before letting AI agents create or revise durable docs
-- Add project-specific docs under \`docs/domain/\`, \`docs/runbooks/\`, or \`docs/special/\`
-- Define shared product or repo language in \`docs/domain/glossary.md\`
-- Define internal implementation language in \`docs/domain/technical-glossary.md\`
+- Read \`docs/standards/documentation-model.md\` before letting AI agents create or revise durable docs
+- Add approved product behavior under \`docs/product/\`
+- Define shared behavioral and technical language in \`docs/glossary.md\`
+- Confirm local git guardrails are configured: \`git config --get core.hooksPath\` → \`.githooks\`, \`git config --get commit.template\` → \`.gitmessage\`
+- Add project-specific system, standards, and runbook docs as needed
+- Run \`./scripts/check-guardrails.sh\` after scaffold to confirm local guardrail configuration
 - Add nested \`AGENTS.md\` files only where subtree rules differ
 - Replace this starter text with repo-specific onboarding
 
@@ -127,22 +131,25 @@ A decision becomes binding through human approval, not merely because an AI wrot
 
 - \`AGENTS.md\`
 - \`docs/README.md\`
-- \`docs/domain/glossary.md\`
-- \`docs/domain/technical-glossary.md\`
-- \`docs/special/documentation-model.md\`
-- \`docs/special/documentation-schema.md\`
+- \`docs/glossary.md\`
+- \`docs/standards/change-declaration.md\`
+- \`docs/standards/definition-of-done.md\`
+- \`docs/standards/documentation-model.md\`
+- \`docs/standards/documentation-schema.md\`
+- \`docs/standards/testing.md\`
+- \`scripts/check-guardrails.sh\`
 
 ## Changelog
 
 ### $today
-- Initialized from the template repo with the documentation scaffold and authority model.
-EOF
+- Initialized from the template repo with the behavior-first documentation scaffold, authority model, and local commit guardrails.
+README
 
-cat > "$destination_abs/.gitignore" <<'EOF'
+cat > "$destination_abs/.gitignore" <<'GITIGNORE'
 .DS_Store
 .pi/
 scratch/*
 !scratch/README.md
-EOF
+GITIGNORE
 
 printf 'Initialized template repo at %s\n' "$destination_abs"

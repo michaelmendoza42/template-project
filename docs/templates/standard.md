@@ -1,19 +1,19 @@
-# Reference note title
+# Standard title
 Last edited: YYYY-MM-DD
-Status: Draft
-Scope: Short description of what this note covers
+Status: Active | Proposed
+Scope: Repository-wide rule or convention
 Related files: `path/to/related-doc.md`
 
 Brief description.
 
-## Key concepts
+## Rules
 
-- Concept or rule
-- Concept or rule
+- Rule 1
+- Rule 2
 
-## Details
+## Validation
 
-Add the main content here.
+How to tell whether the standard is being followed.
 
 ## Related docs
 

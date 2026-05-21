@@ -1,5 +1,5 @@
 # Runbooks
-Last edited: 2026-05-11
+Last edited: 2026-05-20
 
 Use this folder for repeatable operational procedures.
 
@@ -12,7 +12,8 @@ Examples include:
 - incident response
 - local environment recovery
 - data repair steps
-- operational checks
+- retrofit and migration procedures
+- validation checklists someone else can execute
 
 ## Usage
 
@@ -20,10 +21,19 @@ A runbook should be executable by someone who was not present for the original d
 
 ## Related docs
 
-- `react-feature-paradigm.md`
-- `../special/documentation-schema.md`
+- `repo-scaffold.md`
+- `migrating-doc-structure.md`
+- `../standards/definition-of-done.md`
+- `../standards/documentation-schema.md`
+- `../../scripts/check-guardrails.sh`
 
 ## Changelog
+
+### 2026-05-20
+- Linked the guardrail health check from the runbooks index as an operational verification step.
+- Linked the definition-of-done standard from the runbooks index as the default completion contract for executable procedures.
+- Clarified that retrofit and migration procedures belong in runbooks.
+- Updated related docs for the new taxonomy.
 
 ### 2026-05-11
 - Linked the React feature paradigm runbook as canonical guidance for feature implementation.

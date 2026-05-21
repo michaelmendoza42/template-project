@@ -1,5 +1,5 @@
 # Warp Pipe Routing
-Last edited: 2026-05-12
+Last edited: 2026-05-21
 Status: Active
 Scope: First-pass routing policy for assets dropped into `warp-pipe/`
 Related files: `README.md`, `AGENTS.md`, `processed-log.md`
@@ -13,8 +13,8 @@ This file gives the AI a default routing policy when the user asks it to process
 Move to:
 
 - `docs/` when the asset is durable reference material
-- `plans/active/` when the asset supports in-progress planning
-- `tasks/` when the asset is task-specific and temporary
+- `work/plans/` when the asset supports in-progress planning
+- `work/tasks/` when the asset is task-specific and temporary
 - `scratch/` when the asset is exploratory or disposable
 
 ### Images and visual assets
@@ -57,6 +57,9 @@ Ask the user before:
 - `processed-log.md`
 
 ## Changelog
+
+### 2026-05-21
+- Updated temporary-work destinations to `work/plans/` and `work/tasks/`.
 
 ### 2026-05-12
 - Added the initial routing policy for assets dropped into `warp-pipe/`.

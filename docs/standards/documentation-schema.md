@@ -1,5 +1,5 @@
 # Repository Documentation Schema
-Last edited: 2026-05-17
+Last edited: 2026-05-20
 Status: Active
 Scope: Canonical and reference Markdown docs in this template repo (`README.md`, `docs/**`, and similar human-facing reference docs)
 Related files: `documentation-model.md`, `../templates/`
@@ -17,8 +17,7 @@ In scope by default:
 Out of scope by default:
 
 - `AGENTS.md`
-- `plans/**`
-- `tasks/**`
+- `work/**`
 - `scratch/**`
 - vendored, generated, or third-party content
 
@@ -30,7 +29,7 @@ Every in-scope Markdown file should include:
 
 1. `# Title` — a single top-level heading.
 2. `Last edited: YYYY-MM-DD` — placed immediately under the title.
-3. Optional metadata lines such as `Status`, `Owner`, `Scope`, `Related files`, `Decision owner`, `Drafted by`, or `Approved by`.
+3. Optional metadata lines such as `Status`, `Owner`, `Scope`, `Related files`, `Decision owner`, `Drafted by`, `Approved by`, or `Change policy`.
 4. Main body content.
 5. `## Changelog` — always the final top-level section.
 6. Reverse-chronological changelog entries with newest first.
@@ -71,7 +70,7 @@ Recommended sections:
 - related docs
 - changelog
 
-### ADR-style docs
+### Decision records
 
 Recommended sections:
 
@@ -84,13 +83,27 @@ Recommended sections:
 - follow-up
 - changelog
 
-### Domain or policy docs
+### Product behavior docs
+
+Canonical behavior docs should include:
+
+- status and approval metadata
+- behavior summary
+- rules and invariants
+- edge cases and examples
+- non-goals
+- related docs
+- changelog
+
+When a behavior doc is meant to be fully canonical, it should also make the protected behavior and approval boundary obvious through metadata such as `Decision owner`, `Approved by`, and `Change policy`.
+
+### System or standards docs
 
 Recommended sections:
 
 - status or scope metadata when useful
-- key concepts or rules
-- examples or constraints
+- rules, concepts, or constraints
+- examples when they reduce ambiguity
 - related docs
 - changelog
 
@@ -120,11 +133,22 @@ When creating or editing an in-scope doc:
 Copy/paste starters live in `docs/templates/`:
 
 - `docs/templates/general.md`
+- `docs/templates/product-behavior.md`
+- `docs/templates/system-note.md`
+- `docs/templates/standard.md`
 - `docs/templates/decision.md`
 - `docs/templates/readme.md`
 - `docs/templates/runbook.md`
+- `docs/templates/work-item.md`
 
 ## Changelog
+
+### 2026-05-20
+- Merged canonical behavior-doc shape guidance into the product behavior section.
+- Added `non-goals` as part of the recommended shape for canonical behavior docs.
+- Updated exclusions to use `work/**` instead of legacy temporary-work folders.
+- Reframed the template list and doc types around product, system, standards, runbooks, and decisions.
+- Added `Change policy` as a recommended metadata field for behavior-protection docs.
 
 ### 2026-05-17
 - Added authority-related metadata examples such as `Decision owner`, `Drafted by`, and `Approved by`.

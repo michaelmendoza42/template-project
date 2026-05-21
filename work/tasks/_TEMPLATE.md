@@ -1,10 +1,10 @@
-# Task: ID or short title
+# Work item: ID or short title
 
 - Status: Draft
 - Owner: Name or team
 - Created: YYYY-MM-DD
 - Expires when: Condition that makes this task note obsolete
-- Promote to: `docs/adr/...` | `docs/domain/...` | `docs/runbooks/...` | `docs/special/...` | none
+- Promote to: `docs/product/...` | `docs/system/...` | `docs/standards/...` | `docs/runbooks/...` | `docs/decisions/...` | none
 
 ## Objective
 

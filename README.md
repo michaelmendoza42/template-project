@@ -1,21 +1,22 @@
 # Template Project
-Last edited: 2026-05-17
+Last edited: 2026-05-20
 
-Starter governance template for React/web-app repositories that separates durable policy from temporary work state and makes decision authority explicit.
+Starter governance template for behavior-first product repositories. It separates durable product truth from system reference, repo standards, operational procedures, and temporary execution work.
 
 ## Overview
 
-This repository is a starter layout for React/web-app projects that separate:
+This repository is organized around five questions:
 
-1. **Canonical docs** — stable source-of-truth policy and knowledge
-2. **Scoped operational docs** — local rules near the code they govern
-3. **Ephemeral work artifacts** — temporary plans, migration notes, and task state
-4. **Inferred memory** — useful convenience, never authority
+1. What should the product do?
+2. How is the system shaped to do that?
+3. What standards govern the repository?
+4. How do we operate or validate it safely?
+5. What work is active right now?
 
-It also makes the authority model explicit:
+It also keeps the authority model explicit:
 
 - **Human decisions** bind until a human replaces them.
-- **AI proposals** are drafts until approved.
+- **AI proposals** are drafts until a human approves them.
 - **AI assumptions** may change anytime unless they conflict with human decisions.
 - **Location alone does not create authority.**
 
@@ -23,62 +24,75 @@ It also makes the authority model explicit:
 
 ```text
 .
+├── .githooks/
+├── .gitmessage
 ├── AGENTS.md
 ├── README.md
 ├── docs/
 │   ├── README.md
-│   ├── adr/
-│   ├── domain/
+│   ├── decisions/
+│   ├── product/
 │   ├── runbooks/
-│   ├── special/
+│   ├── standards/
+│   ├── system/
 │   └── templates/
-├── plans/
-│   ├── active/
-│   └── archived/
-├── tasks/
-└── scratch/
+├── work/
+│   ├── archived/
+│   ├── plans/
+│   └── tasks/
+├── scratch/
+├── scripts/
+└── warp-pipe/
 ```
 
 ## Conventions
 
 - `README.md` is for human onboarding.
 - `AGENTS.md` holds stable agent-operational rules that matter in most sessions.
-- `docs/adr/`, `docs/domain/`, `docs/runbooks/`, and `docs/special/` are canonical.
-- React.js is the default implementation paradigm for new feature work in repositories scaffolded from this template.
-- Human-approved policy, ADRs, domain rules, and runbooks outrank AI-authored drafts and inferred conventions.
-- A document becomes binding because a human approved it, not merely because it lives under `docs/`.
-- Add nested `AGENTS.md` files only when a subtree needs local rules that are not globally true.
-- `plans/active/` and `tasks/` hold temporary work state. Label it clearly and promote durable learnings into canonical docs.
-- `scratch/` is disposable. Do not treat it as source of truth.
-- Tool memory, chat history, and inferred preferences are convenience only. If something matters to correctness, onboarding, architecture, or safety, write it down explicitly.
+- `.gitmessage` and `.githooks/commit-msg` provide local declaration-based commit guardrails.
+- `docs/product/` is the primary canonical home for human-approved behavior and product rules.
+- `docs/system/` holds durable architecture and implementation-shaping reference.
+- `docs/standards/` holds repository-wide rules and conventions.
+- `docs/runbooks/` holds executable procedures.
+- `docs/decisions/` is optional and should stay sparse.
+- `work/` holds temporary plans, tasks, migration notes, and other execution state.
+- `scratch/` is disposable and never authoritative.
 
 ## Promotion rule
 
 If a temporary note or AI inference becomes important enough to rely on repeatedly, promote it to one of:
 
 - `AGENTS.md`
-- `docs/adr/`
-- `docs/domain/`
+- `docs/product/`
+- `docs/system/`
+- `docs/standards/`
 - `docs/runbooks/`
-- `docs/special/`
+- `docs/decisions/`
 
 Promotion chooses the durable home. Human approval is what makes the promoted decision binding.
-
-## Agent instructions
-
-This template uses `AGENTS.md` as the repository's stable agent instruction file.
 
 ## Related docs
 
 - `docs/README.md`
-- `docs/domain/glossary.md`
-- `docs/domain/technical-glossary.md`
+- `docs/glossary.md`
 - `docs/runbooks/repo-scaffold.md`
-- `docs/runbooks/react-feature-paradigm.md`
-- `docs/special/documentation-model.md`
-- `docs/special/documentation-schema.md`
+- `docs/runbooks/migrating-doc-structure.md`
+- `docs/standards/change-declaration.md`
+- `docs/standards/documentation-model.md`
+- `docs/standards/documentation-schema.md`
+- `docs/standards/testing.md`
 
 ## Changelog
+
+### 2026-05-20
+- Added declaration-based local git guardrails with `.gitmessage` and `.githooks/commit-msg`.
+- Linked the new change-declaration standard from the root README.
+- Reorganized the template around `product`, `system`, `standards`, `runbooks`, `decisions`, and `work`.
+- Made behavior authority and temporary work separation explicit in the root layout and conventions.
+
+### 2026-05-18
+- Audit update: documented `scripts/` and `warp-pipe/` in the template layout.
+- Clarified what `setup-template-repo.sh` copies versus template-local areas that do not ship to scaffolded repos.
 
 ### 2026-05-17
 - Clarified that this template is a React/web-app-first governance template rather than a full app starter.

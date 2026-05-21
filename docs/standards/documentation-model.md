@@ -1,13 +1,13 @@
 # Repository Documentation Model
-Last edited: 2026-05-17
+Last edited: 2026-05-20
 Status: Active
 Scope: Repository-wide documentation policy
-Related files: `documentation-schema.md`, `../README.md`, `../domain/glossary.md`
+Related files: `doc-routing.md`, `documentation-schema.md`, `../README.md`, `../glossary.md`
 
 This repository separates two questions that often get conflated:
 
-1. **Where does a piece of knowledge live?**
-2. **Who authorized it?**
+1. Where does a piece of knowledge live?
+2. Who authorized it?
 
 The documentation tiers answer the first question. The authority model answers the second.
 
@@ -22,20 +22,21 @@ These are binding until replaced by a newer human-approved decision.
 Examples:
 
 - direct user instructions
-- approved ADRs
-- approved domain rules and contracts
-- approved runbooks
-- stable repo policy in `AGENTS.md` or approved docs under `docs/special/`
+- approved product behavior docs
+- approved system docs
+- approved standards and runbooks
+- approved decision records
+- stable repo policy in `AGENTS.md`
 
 ### 2. AI explicit proposals
 
-These are written-down drafts produced by an AI agent: proposed ADRs, draft conventions, candidate policies, and other suggested durable changes.
+These are written-down drafts produced by an AI agent: proposed behavior docs, draft conventions, candidate standards, proposed decision records, and other suggested durable changes.
 
 Rules:
 
 - useful to keep for review
 - not binding until a human approves them
-- default home is `plans/active/` or `tasks/`
+- default home is `work/plans/` or `work/tasks/`
 - if stored in canonical docs, they must be clearly marked, for example with `Status: Proposed`
 
 ### 3. AI implicit decisions
@@ -58,21 +59,22 @@ Store them in:
 
 - `README.md`
 - `AGENTS.md`
-- `docs/adr/`
-- `docs/domain/`
+- `docs/product/`
+- `docs/system/`
+- `docs/standards/`
 - `docs/runbooks/`
-- `docs/special/`
+- `docs/decisions/`
 
 Canonical docs should contain things the team expects to be true enough to rely on repeatedly.
 
 Examples:
 
-- architecture decisions
-- domain invariants
-- safety constraints
-- integration contracts
-- build, test, and deploy procedures
-- stable repo conventions
+- intended product behavior
+- product rules and invariants
+- architecture notes and integration contracts
+- testing and repository standards
+- build, test, deploy, and migration procedures
+- consequential tradeoff records
 
 ## 2. Scoped operational docs
 
@@ -92,9 +94,9 @@ These documents are intentionally temporary.
 
 Store them in:
 
-- `plans/active/`
-- `plans/archived/`
-- `tasks/`
+- `work/plans/`
+- `work/tasks/`
+- `work/archived/`
 - `scratch/` for disposable notes
 
 Use them for:
@@ -138,20 +140,26 @@ Nothing inferred becomes policy until it is both:
 
 When a temporary plan or recurring assumption becomes important, move it into the right durable home:
 
-- `AGENTS.md` for stable agent-operational rules
-- `docs/adr/` for architecture decisions
-- `docs/domain/` for invariants and contracts
+- `docs/product/` for intended behavior and product rules
+- `docs/system/` for architecture and technical reference
+- `docs/standards/` for repository-wide conventions
 - `docs/runbooks/` for repeatable procedures
-- `docs/special/` for project-specific policy and special cases
+- `docs/decisions/` for tradeoff records
+- `AGENTS.md` for stable agent-operational rules
 
 Promotion chooses the document home. Human approval makes it binding.
 
 ## Practical rules
 
+- When classifying a doc and the home is unclear, use `doc-routing.md` before creating or moving files.
+
+
 - Do not silently replace a human-approved decision with an AI-authored rewrite.
 - If an approved decision needs to change, draft the replacement and ask for approval or record the superseding approval explicitly.
 - Do not treat placement under `docs/` as proof that a rule is binding.
 - When approval matters, encode it with metadata such as `Status`, `Decision owner`, and `Approved by`.
+- Agents may draft canonical behavior docs only when explicitly asked or when the doc is clearly marked `Status: Proposed`.
+- Approved behavior in `docs/product/` should not be casually rewritten.
 
 ## Anti-patterns
 
@@ -164,8 +172,15 @@ Avoid these failure modes:
 - leaving temporary docs unlabelled so they look permanent
 - treating an AI-authored doc as automatically ratified because it lives under `docs/`
 - silently rewriting approved policy without human direction
+- using `docs/decisions/` as the default home for ordinary behavior docs
 
 ## Changelog
+
+### 2026-05-20
+- Linked the routing standard as the tie-breaker for doc classification.
+- Reframed canonical docs around `product`, `system`, `standards`, `runbooks`, `decisions`, and `work`.
+- Added explicit rules protecting approved product behavior from casual agent rewrites.
+- Moved the default home for AI-authored proposals from `plans/` and `tasks/` to `work/`.
 
 ### 2026-05-17
 - Added an explicit authority model separating human-approved decisions from AI-authored proposals and AI implicit decisions.
